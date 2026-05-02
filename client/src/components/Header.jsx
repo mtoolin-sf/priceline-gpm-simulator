@@ -22,20 +22,16 @@ export default function Header() {
               {brand.logoDataUrl ? (
                 <img src={brand.logoDataUrl} alt={brand.name} className="h-9 object-contain" />
               ) : (
-                <div className="flex items-center gap-2">
-                  <div className="bg-white rounded-lg px-3 py-1.5">
-                    <span className="font-black text-lg tracking-tight" style={{ color: 'var(--brand-primary)' }}>
-                      priceline
-                    </span>
-                  </div>
-                  <span className="text-white font-semibold text-sm opacity-90">pharmacy</span>
+                <div className="flex flex-col leading-none">
+                  <span className="text-white font-black text-2xl tracking-tight" style={{ fontFamily: 'Poppins, sans-serif', letterSpacing: '-0.02em' }}>priceline</span>
+                  <span className="text-white/75 text-xs font-medium tracking-widest uppercase" style={{ fontFamily: 'Poppins, sans-serif' }}>pharmacy</span>
                 </div>
               )}
             </Link>
 
             {/* Beauty Club badge */}
             <div className="hidden sm:flex items-center gap-2 bg-white/20 rounded-full px-4 py-1.5">
-              <span className="text-white text-sm font-medium">✦ Beauty Club</span>
+              <span className="text-white text-sm font-medium">Beauty Club</span>
               {state.profile && (
                 <span className="text-white/80 text-xs">| {state.profile.name}</span>
               )}
@@ -51,7 +47,7 @@ export default function Header() {
                 }`}
                 title="Toggle between live Salesforce and mock data"
               >
-                {state.useMock ? '⚡ Mock' : '🔴 Live SF'}
+                {state.useMock ? 'Mock' : 'Live SF'}
               </button>
 
               {/* Brand config */}
@@ -60,17 +56,17 @@ export default function Header() {
                 className="p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
                 title="Brand Configurator"
               >
-                ⚙
+                Brand
               </button>
 
               {/* Cart */}
               {state.profile && (
                 <button
                   onClick={() => navigate('/cart')}
-                  className="relative p-2 rounded-full bg-white text-priceline-pink hover:bg-pink-50 transition-colors"
+                  className="relative px-3 py-2 rounded-full bg-white text-priceline-pink hover:bg-pink-50 transition-colors text-sm font-semibold"
                   style={{ color: 'var(--brand-primary)' }}
                 >
-                  🛒
+                  Cart
                   {cartCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-yellow-400 text-yellow-900 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                       {cartCount}

@@ -1,20 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --brand-primary: #E8005C;
-  --brand-primary-dark: #B8004A;
-  --brand-primary-light: #FFE0ED;
-  --brand-dark: #1A1A1A;
-  --brand-bg: #F9F4F6;
-  --brand-text: #1A1A1A;
+  --brand-primary: #EC2B8C;
+  --brand-primary-dark: #C41F73;
+  --brand-primary-light: #FCEDF5;
+  --brand-dark: #1E1E1E;
+  --brand-bg: #FAFAFA;
+  --brand-text: #1E1E1E;
 }
 
 body {
   background-color: var(--brand-bg);
   color: var(--brand-text);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
 }
 
 .btn-primary {

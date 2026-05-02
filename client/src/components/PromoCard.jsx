@@ -10,7 +10,7 @@ export default function PromoCard({ promo, applied = false }) {
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-lg">{applied ? '✅' : '🎯'}</span>
+            <span className={`w-2 h-2 rounded-full shrink-0 ${applied ? 'bg-green-500' : 'bg-blue-500'}`}></span>
             <span className="font-semibold text-sm text-gray-900">{name}</span>
           </div>
           {reward && <p className="text-xs text-gray-600 mt-1">{reward}</p>}

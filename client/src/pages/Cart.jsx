@@ -53,8 +53,7 @@ export default function Cart() {
   if (state.items.length === 0) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-16 text-center">
-        <div className="text-5xl mb-4">🛒</div>
-        <h2 className="text-xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
         <p className="text-gray-500 mb-6">Add some products to see GPM promotions in action.</p>
         <button onClick={() => navigate('/shop')} className="btn-primary px-8 py-3 rounded-full">Browse Products</button>
       </div>
@@ -139,7 +138,7 @@ export default function Cart() {
                   <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></span>
                   Checking with Salesforce GPM…
                 </span>
-              ) : '🔍 Check Eligible Promotions'}
+              ) : 'Check Eligible Promotions'}
             </button>
 
             <button
@@ -152,7 +151,7 @@ export default function Cart() {
                   <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
                   Processing with Salesforce…
                 </span>
-              ) : '✓ Checkout & Apply Promotions'}
+              ) : 'Checkout & Apply Promotions'}
             </button>
           </div>
 

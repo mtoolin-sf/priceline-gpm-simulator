@@ -40,7 +40,7 @@ export default function ProfileSelector() {
       {/* Header */}
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium text-white mb-4" style={{ backgroundColor: 'var(--brand-primary)' }}>
-          ✦ Beauty Club GPM Demo
+          Beauty Club GPM Demo
         </div>
         <h1 className="text-3xl sm:text-4xl font-black text-gray-900 mb-3">
           Welcome to <span style={{ color: 'var(--brand-primary)' }}>{brand.name}</span>

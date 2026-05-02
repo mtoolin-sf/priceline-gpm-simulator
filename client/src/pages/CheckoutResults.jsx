@@ -39,7 +39,6 @@ export default function CheckoutResults() {
       {/* Success banner */}
       <div className="rounded-2xl p-6 mb-6 text-white" style={{ background: 'linear-gradient(135deg, var(--brand-primary), var(--brand-primary-dark, #B8004A))' }}>
         <div className="flex items-center gap-3 mb-2">
-          <span className="text-3xl">✅</span>
           <h1 className="text-2xl font-black">Checkout Complete!</h1>
         </div>
         <p className="opacity-90 text-sm">
@@ -102,7 +101,7 @@ export default function CheckoutResults() {
           {/* Beauty Points */}
           {state.profile?.isMember && (
             <div className="card p-5">
-              <h2 className="font-bold text-gray-900 mb-4">✦ Beauty Points Earned</h2>
+              <h2 className="font-bold text-gray-900 mb-4">Beauty Points Earned</h2>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Base points (1pt per $1)</span>
@@ -155,7 +154,7 @@ export default function CheckoutResults() {
           {/* BLM Spend Tracker */}
           {blm && (
             <div className="card p-5 border-2 border-yellow-200">
-              <h2 className="font-bold text-gray-900 mb-4">🎁 Non-Member Spend Tracker</h2>
+              <h2 className="font-bold text-gray-900 mb-4">Non-Member Spend Tracker</h2>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-500">Cumulative spend</span>
@@ -176,7 +175,7 @@ export default function CheckoutResults() {
                 </div>
                 {blm.currentTier ? (
                   <div className="mt-3 p-3 bg-yellow-50 rounded-xl text-center">
-                    <div className="font-bold text-yellow-800">🎉 Eligible for {blm.currentTier}!</div>
+                    <div className="font-bold text-yellow-800">Eligible for {blm.currentTier}!</div>
                     <div className="text-xs text-yellow-600 mt-0.5">Gift card issued at window close</div>
                   </div>
                 ) : blm.nextTier ? (

@@ -2,10 +2,10 @@ import React from 'react';
 import { useCart } from '../context/CartContext';
 
 const CHANNELS = [
-  { id: 'Online', label: 'Online', icon: '💻' },
-  { id: 'In Store', label: 'In Store', icon: '🏪' },
-  { id: 'App', label: 'App', icon: '📱' },
-  { id: 'Out of Store', label: 'Out of Store', icon: '🌐' },
+  { id: 'Online', label: 'Online' },
+  { id: 'In Store', label: 'In Store' },
+  { id: 'App', label: 'App' },
+  { id: 'Out of Store', label: 'Out of Store' },
 ];
 
 export default function ChannelSelector() {
@@ -23,7 +23,7 @@ export default function ChannelSelector() {
           }`}
           style={state.channel === ch.id ? { backgroundColor: 'var(--brand-primary)', borderColor: 'var(--brand-primary)' } : {}}
         >
-          <span>{ch.icon}</span> {ch.label}
+          {ch.label}
         </button>
       ))}
     </div>

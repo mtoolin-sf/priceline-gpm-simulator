@@ -9,7 +9,7 @@ export default function JsonViewer({ title, data }) {
         onClick={() => setOpen(o => !o)}
         className="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 text-sm font-medium text-gray-600 transition-colors"
       >
-        <span>🔍 {title || 'Raw API Response'}</span>
+        <span>{title || 'Raw API Response'}</span>
         <span className="text-gray-400">{open ? '▲' : '▼'}</span>
       </button>
       {open && (
