@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-primary: #E8005C;
+  --brand-primary-dark: #B8004A;
+  --brand-primary-light: #FFE0ED;
+  --brand-dark: #1A1A1A;
+  --brand-bg: #F9F4F6;
+  --brand-text: #1A1A1A;
+}
+
+body {
+  background-color: var(--brand-bg);
+  color: var(--brand-text);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold text-white transition-all duration-200 shadow-sm;
+  background-color: var(--brand-primary);
+}
+.btn-primary:hover { background-color: var(--brand-primary-dark); }
+.btn-primary:disabled { @apply opacity-50 cursor-not-allowed; }
+
+.btn-outline {
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold border-2 transition-all duration-200;
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+.btn-outline:hover { background-color: var(--brand-primary-light); }
+
+.card {
+  @apply bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden;
+}
+
+.badge-tier-gold { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800; }
+.badge-tier-silver { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-700; }
+.badge-tier-standard { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700; }
+.badge-member { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-pink-50 text-pink-700; }
+.badge-nonmember { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-50 text-gray-500; }
+
+.promo-card {
+  @apply rounded-xl border-2 border-green-200 bg-green-50 p-4;
+}
+
+.spinner {
+  @apply animate-spin h-5 w-5 text-white;
+}
