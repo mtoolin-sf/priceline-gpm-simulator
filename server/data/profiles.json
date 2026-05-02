@@ -110,5 +110,39 @@
     "avatar": "OT",
     "color": "#9CA3AF",
     "cardJoinDaysAgo": 120
+  },
+  {
+    "id": "diana-nguyen",
+    "name": "Diana Nguyen",
+    "firstName": "Diana",
+    "tier": "Gold",
+    "cardType": "Sister Club Card",
+    "isMember": true,
+    "pointsBalance": 8500,
+    "contactId": "003Ii0000059d0CIAQ",
+    "memberId": "0lMIi0000004MPjMAM",
+    "membershipNumber": "PBC0007",
+    "scenario": "UC8 & UC9 — Cross-category Skincare + Makeup bundle, Gold tier exclusive offer",
+    "avatar": "DN",
+    "color": "#D97706",
+    "cardJoinDaysAgo": 400,
+    "lastTransactionDaysAgo": 5
+  },
+  {
+    "id": "rachel-kim",
+    "name": "Rachel Kim",
+    "firstName": "Rachel",
+    "tier": "Silver",
+    "cardType": "Sister Club Card",
+    "isMember": true,
+    "pointsBalance": 3200,
+    "contactId": "003Ii0000059d0HIAQ",
+    "memberId": "0lMIi0000004MPoMAM",
+    "membershipNumber": "PBC0008",
+    "scenario": "UC10 — Supplier-funded L'Oréal 500pt SKU bonus (funded by L'Oréal, not Priceline)",
+    "avatar": "RK",
+    "color": "#0891B2",
+    "cardJoinDaysAgo": 200,
+    "lastTransactionDaysAgo": 10
   }
 ]

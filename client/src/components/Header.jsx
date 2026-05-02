@@ -1,33 +1,90 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useCallback } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useBrand } from '../context/BrandContext';
 import BrandConfigurator from './BrandConfigurator';
+import { reconnect } from '../api/client';
 
 export default function Header() {
   const { state, dispatch } = useCart();
   const { brand } = useBrand();
   const [showBrand, setShowBrand] = useState(false);
+  const [reconnecting, setReconnecting] = useState(false);
+  const [reconnectStatus, setReconnectStatus] = useState(null); // 'ok' | 'error' | null
   const navigate = useNavigate();
+  const location = useLocation();
+  const onResponsesPage = location.pathname === '/responses';
 
   const cartCount = state.items.reduce((s, i) => s + i.qty, 0);
+
+  const handleLogoClick = useCallback(async (e) => {
+    e.preventDefault();
+    if (reconnecting) return;
+    setReconnecting(true);
+    setReconnectStatus(null);
+    try {
+      await reconnect();
+      setReconnectStatus('ok');
+      setTimeout(() => {
+        setReconnectStatus(null);
+        navigate('/');
+      }, 800);
+    } catch {
+      setReconnectStatus('error');
+      setTimeout(() => {
+        setReconnectStatus(null);
+        navigate('/');
+      }, 1500);
+    } finally {
+      setReconnecting(false);
+    }
+  }, [reconnecting, navigate]);
+
+  const logoRing = reconnecting
+    ? 'ring-2 ring-yellow-300 ring-offset-1 ring-offset-transparent'
+    : reconnectStatus === 'ok'
+    ? 'ring-2 ring-green-400 ring-offset-1 ring-offset-transparent'
+    : reconnectStatus === 'error'
+    ? 'ring-2 ring-red-400 ring-offset-1 ring-offset-transparent'
+    : '';
 
   return (
     <>
       <header className="sticky top-0 z-40 shadow-md" style={{ backgroundColor: 'var(--brand-primary)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-3">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo — click to reconnect + navigate home */}
+            <button
+              onClick={handleLogoClick}
+              className={`flex items-center gap-3 rounded-xl transition-all ${reconnecting ? 'opacity-70' : 'hover:opacity-90'}`}
+              title={reconnecting ? 'Reconnecting…' : 'Home — click to refresh SF connection'}
+              style={{ background: 'none', border: 'none', padding: 0, cursor: reconnecting ? 'wait' : 'pointer' }}
+            >
               {brand.logoDataUrl ? (
-                <img src={brand.logoDataUrl} alt={brand.name} className="h-9 object-contain" />
+                <img src={brand.logoDataUrl} alt={brand.name} className={`h-9 object-contain rounded-lg ${logoRing}`} />
               ) : (
-                <div className="flex flex-col leading-none">
-                  <span className="text-white font-black text-2xl tracking-tight" style={{ fontFamily: 'Poppins, sans-serif', letterSpacing: '-0.02em' }}>priceline</span>
-                  <span className="text-white/75 text-xs font-medium tracking-widest uppercase" style={{ fontFamily: 'Poppins, sans-serif' }}>pharmacy</span>
+                <div className={`bg-white rounded-xl px-4 py-2 ${logoRing}`}>
+                  {reconnecting ? (
+                    <div className="h-12 flex items-center gap-2 px-1">
+                      <span className="w-2 h-2 rounded-full bg-yellow-400 animate-ping inline-block" />
+                      <span className="text-xs text-gray-400 font-medium">Reconnecting…</span>
+                    </div>
+                  ) : reconnectStatus === 'ok' ? (
+                    <div className="h-12 flex items-center gap-2 px-1">
+                      <span className="w-2 h-2 rounded-full bg-green-500 inline-block" />
+                      <span className="text-xs text-green-600 font-semibold">Connected</span>
+                    </div>
+                  ) : reconnectStatus === 'error' ? (
+                    <div className="h-12 flex items-center gap-2 px-1">
+                      <span className="w-2 h-2 rounded-full bg-red-500 inline-block" />
+                      <span className="text-xs text-red-500 font-semibold">Offline</span>
+                    </div>
+                  ) : (
+                    <img src="/priceline-logo.webp" alt="Priceline Pharmacy" className="h-12 object-contain" />
+                  )}
                 </div>
               )}
-            </Link>
+            </button>
 
             {/* Beauty Club badge */}
             <div className="hidden sm:flex items-center gap-2 bg-white/20 rounded-full px-4 py-1.5">
@@ -47,8 +104,22 @@ export default function Header() {
                 }`}
                 title="Toggle between live Salesforce and mock data"
               >
-                {state.useMock ? 'Mock' : 'Live SF'}
+                {state.useMock ? (
+                  <><span className="w-2 h-2 rounded-full bg-yellow-600 inline-block" /> Mock</>
+                ) : (
+                  <><span className="w-2 h-2 rounded-full bg-green-400 inline-block animate-pulse" /> Live SF</>
+                )}
               </button>
+
+              {/* WesHealth Q&A */}
+              <Link
+                to="/responses"
+                className={`hidden sm:flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full transition-all ${
+                  onResponsesPage ? 'bg-white text-pink-700' : 'bg-white/20 text-white hover:bg-white/30'
+                }`}
+              >
+                WesHealth Q&A
+              </Link>
 
               {/* Brand config */}
               <button

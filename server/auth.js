@@ -35,4 +35,9 @@ async function getSFToken() {
   throw new Error('No SF auth configured. Set SF_CLIENT_ID/SF_CLIENT_SECRET or SF_ORG_ALIAS.');
 }
 
-module.exports = { getSFToken };
+function clearToken() {
+  cachedToken = null;
+  tokenExpiry = 0;
+}
+
+module.exports = { getSFToken, clearToken };

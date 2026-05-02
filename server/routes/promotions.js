@@ -124,6 +124,55 @@ function buildMockEligible(profile, items, channel) {
     });
   }
 
+  // UC8 — Cross-category bundle: Skincare + Makeup in same basket → 1,500 pts
+  const makeupCount = items.filter(i => i.category === 'Makeup').reduce((s, i) => s + i.qty, 0);
+  if (skincareCount >= 1 && makeupCount >= 1 && profile.isMember) {
+    promos.push({
+      promotionId: 'UC8-PROMO-001',
+      promotionName: 'Skincare + Makeup Cross-Category Bundle',
+      promotionDescription: 'Buy 1+ Skincare AND 1+ Makeup products in the same basket → earn 1,500 Beauty Points ($7.50). Cross-line promotion evaluated across all cart items.',
+      eligibilityReasonCode: 'CROSS_CATEGORY_BUNDLE_MET',
+      rewardPoints: 1500,
+      totalReward: '1,500 Beauty Points ($7.50 value)',
+      promotionType: 'CrossCategoryBundle',
+      ruleDetail: 'GPM cross-line rule: qualifies when cartLineDetails span both Skincare and Makeup product catalog categories in a single cartDetails entry.',
+    });
+  }
+
+  // UC9 — Gold tier exclusive: 2,000 pts on Gift Sets, Gold members only
+  const giftSetCount = items.filter(i => i.category === 'Gift Sets').reduce((s, i) => s + i.qty, 0);
+  if (giftSetCount >= 1 && profile.tier === 'Gold') {
+    promos.push({
+      promotionId: 'UC9-PROMO-001',
+      promotionName: 'Gold Member Exclusive — Gift Set Bonus',
+      promotionDescription: 'Gold Beauty Club members only: purchase any Priceline Gift Set → earn 2,000 Beauty Points ($10). Not available to Silver or Standard members.',
+      eligibilityReasonCode: 'TIER_GATE_GOLD_MET',
+      rewardPoints: 2000,
+      totalReward: '2,000 Beauty Points ($10 value)',
+      promotionType: 'TierExclusive',
+      ruleDetail: 'GPM member segment rule: LoyaltyProgramMember.CurrentTier = Gold. Evaluation fails for Standard/Silver — promo not returned in eligiblePromotions response.',
+      tierRequired: 'Gold',
+    });
+  }
+
+  // UC10 — Supplier-funded L'Oréal SKU bonus: 500 pts per L'Oréal item, funded by L'Oréal
+  const lorealItems = items.filter(i => i.supplier === "L'Oréal" || (i.brand && i.brand.toLowerCase().includes("l'oréal")));
+  if (lorealItems.length > 0 && profile.isMember) {
+    const lorealPts = lorealItems.reduce((s, i) => s + 500 * i.qty, 0);
+    promos.push({
+      promotionId: 'UC10-PROMO-001',
+      promotionName: "L'Oréal Supplier Bonus — 500 pts per SKU",
+      promotionDescription: `Buy any L'Oréal Paris product → earn 500 Beauty Points per item (${lorealItems.length} item${lorealItems.length > 1 ? 's' : ''} in cart = ${lorealPts.toLocaleString()} pts). Promotion cost funded by L'Oréal, not Priceline.`,
+      eligibilityReasonCode: 'SUPPLIER_FUNDED_SKU_MATCH',
+      rewardPoints: lorealPts,
+      totalReward: `${lorealPts.toLocaleString()} Beauty Points`,
+      promotionType: 'SupplierFunded',
+      fundingSource: "L'Oréal Australia Pty Ltd",
+      fundingModel: 'Supplier absorbs 100% of points cost. Reported via FundingSource__c on PromotionRecord.',
+      ruleDetail: "GPM Quick Promotion: product list = L'Oréal Paris SKUs. FundingSource custom field points to L'Oréal Account record for cost attribution and billing.",
+    });
+  }
+
   return { eligiblePromotions: promos, totalCount: promos.length };
 }
 
@@ -132,11 +181,18 @@ function buildMockExecution(profile, items, channel) {
   const promos = mockEligible.eligiblePromotions;
   const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
 
+  // UC9 Gold gift sets get a 10% price discount in addition to points
+  const giftSetDiscount = promos.find(p => p.promotionType === 'TierExclusive')
+    ? items.filter(i => i.category === 'Gift Sets').reduce((s, i) => s + i.price * i.qty * 0.10, 0)
+    : 0;
+
   const appliedPromos = promos.map(p => ({
     ...p,
-    discountAmount: 0, // points-based, no price discount
+    discountAmount: p.promotionType === 'TierExclusive' ? parseFloat(giftSetDiscount.toFixed(2)) : 0,
     status: 'Applied',
   }));
+
+  const totalDiscount = appliedPromos.reduce((s, p) => s + (p.discountAmount || 0), 0);
 
   return {
     cart: {
@@ -144,8 +200,8 @@ function buildMockExecution(profile, items, channel) {
         cartHeaderId__std: `priceline-exec-${Date.now()}`,
         transactionAmount: subtotal.toFixed(2),
         appliedCartPromotionDetails: appliedPromos,
-        totalDiscountAmount: 0,
-        finalTransactionAmount: subtotal.toFixed(2),
+        totalDiscountAmount: parseFloat(totalDiscount.toFixed(2)),
+        finalTransactionAmount: parseFloat((subtotal - totalDiscount).toFixed(2)),
       }],
     },
   };

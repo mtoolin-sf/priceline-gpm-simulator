@@ -57,3 +57,6 @@ export const uploadLogo = async (file) => {
 
 export const scrapeBrand = (url) =>
   apiFetch('/brand/scrape', { method: 'POST', body: JSON.stringify({ url }) });
+
+export const reconnect = () =>
+  apiFetch('/reconnect', { method: 'POST' });

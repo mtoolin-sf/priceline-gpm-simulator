@@ -8,6 +8,7 @@ import ProfileSelector from './pages/ProfileSelector';
 import ProductCatalog from './pages/ProductCatalog';
 import Cart from './pages/Cart';
 import CheckoutResults from './pages/CheckoutResults';
+import Responses from './pages/Responses';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
                 <Route path="/shop" element={<ProductCatalog />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<CheckoutResults />} />
+                <Route path="/responses" element={<Responses />} />
               </Routes>
             </main>
             <Footer />

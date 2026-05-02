@@ -18,6 +18,18 @@ app.use('/api/brand', require('./routes/brand'));
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));
 
+// Reconnect — clears SF token cache and re-fetches a fresh token
+app.post('/api/reconnect', async (req, res) => {
+  const { clearToken, getSFToken } = require('./auth');
+  clearToken();
+  try {
+    await getSFToken();
+    res.json({ status: 'ok', message: 'SF token refreshed', timestamp: new Date().toISOString() });
+  } catch (err) {
+    res.status(503).json({ status: 'error', message: err.message });
+  }
+});
+
 // Serve React build in production
 const distPath = path.join(__dirname, '../client/dist');
 app.use(express.static(distPath));

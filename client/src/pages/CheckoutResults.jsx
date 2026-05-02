@@ -26,6 +26,11 @@ export default function CheckoutResults() {
   const bonusPoints = appliedPromos.reduce((s, p) => s + (p.rewardPoints || 0), 0);
   const totalPoints = basePoints + bonusPoints;
 
+  // Promo complexity breakdown for display
+  const supplierFundedPromos = appliedPromos.filter(p => p.promotionType === 'SupplierFunded');
+  const tierExclusivePromos  = appliedPromos.filter(p => p.promotionType === 'TierExclusive');
+  const crossCatPromos       = appliedPromos.filter(p => p.promotionType === 'CrossCategoryBundle');
+
   // TJ results
   const tjData = state.tjResult;
   const orderGuid = tjData?.orderGuid || '';
@@ -148,6 +153,37 @@ export default function CheckoutResults() {
                 </div>
               )}
               <JsonViewer title="Transaction Journal API Response" data={state.tjResult} />
+            </div>
+          )}
+
+          {/* Promotion Complexity callout — shown when advanced UCs fire */}
+          {(supplierFundedPromos.length > 0 || tierExclusivePromos.length > 0 || crossCatPromos.length > 0) && (
+            <div className="card p-5 border-l-4" style={{ borderLeftColor: '#7C3AED' }}>
+              <h2 className="font-bold text-gray-900 mb-3">GPM Rule Complexity</h2>
+              <div className="space-y-3 text-sm">
+                {crossCatPromos.length > 0 && (
+                  <div className="p-3 rounded-lg" style={{ background: '#F5F3FF' }}>
+                    <div className="font-semibold mb-1" style={{ color: '#7C3AED' }}>Cross-Category Bundle (UC8)</div>
+                    <p className="text-gray-600 text-xs leading-relaxed">GPM evaluated cart line items across two separate product catalog categories (Skincare + Makeup) and fired a cross-line promotion. This requires GPM's cross-line evaluation engine — not available in basic rule sets.</p>
+                  </div>
+                )}
+                {tierExclusivePromos.length > 0 && (
+                  <div className="p-3 rounded-lg" style={{ background: '#FFFBEB' }}>
+                    <div className="font-semibold mb-1" style={{ color: '#D97706' }}>Tier-Gated Exclusive (UC9)</div>
+                    <p className="text-gray-600 text-xs leading-relaxed">Promotion returned only because LoyaltyProgramMember.CurrentTier = Gold. Standard and Silver members would receive no result for this promotion ID — the eligibility check gates at the member segment level before any rule evaluation.</p>
+                  </div>
+                )}
+                {supplierFundedPromos.length > 0 && (
+                  <div className="p-3 rounded-lg" style={{ background: '#ECFEFF' }}>
+                    <div className="font-semibold mb-1" style={{ color: '#0891B2' }}>Supplier-Funded SKU Bonus (UC10)</div>
+                    <p className="text-gray-600 text-xs leading-relaxed">
+                      Points cost for this promotion is attributed to{' '}
+                      <strong>{supplierFundedPromos[0]?.fundingSource}</strong>{' '}
+                      via FundingSource__c on the promotion record — not to Priceline's loyalty budget. Enables clean supplier billing and campaign ROI reporting.
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           )}
 
