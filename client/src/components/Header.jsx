@@ -3,12 +3,14 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useBrand } from '../context/BrandContext';
 import BrandConfigurator from './BrandConfigurator';
+import MobileAppPreview from './MobileAppPreview';
 import { reconnect } from '../api/client';
 
 export default function Header() {
   const { state, dispatch } = useCart();
   const { brand } = useBrand();
   const [showBrand, setShowBrand] = useState(false);
+  const [showMobile, setShowMobile] = useState(false);
   const [reconnecting, setReconnecting] = useState(false);
   const [reconnectStatus, setReconnectStatus] = useState(null); // 'ok' | 'error' | null
   const navigate = useNavigate();
@@ -121,6 +123,15 @@ export default function Header() {
                 WesHealth Q&A
               </Link>
 
+              {/* Mobile app preview */}
+              <button
+                onClick={() => setShowMobile(true)}
+                className="hidden sm:flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
+                title="Preview personalised offers in mobile app"
+              >
+                📱 App
+              </button>
+
               {/* Brand config */}
               <button
                 onClick={() => setShowBrand(true)}
@@ -150,6 +161,7 @@ export default function Header() {
         </div>
       </header>
       {showBrand && <BrandConfigurator onClose={() => setShowBrand(false)} />}
+      {showMobile && <MobileAppPreview onClose={() => setShowMobile(false)} />}
     </>
   );
 }

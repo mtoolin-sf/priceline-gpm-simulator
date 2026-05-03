@@ -50,6 +50,11 @@ function buildMockEligible(profile, items, channel) {
       rewardPoints: 1000,
       totalReward: '1,000 Beauty Points ($5 value)',
       promotionType: 'QuantityThreshold',
+      loyaltyOffers: [
+        { offerId: 'OFFER-UC1-PTS', offerName: '1,000 Beauty Points', offerType: 'POINTS', fulfillmentAction: 'CREDIT_POINTS', rewardValue: 1000, currencyType: 'BeautyPoints', presentmentDetails: { headline: 'Earn 1,000 Beauty Points', description: 'Worth $5.00, credited instantly to your account', ctaText: 'Claim Points', badgeText: 'Most Popular', imageUrl: '/offers/offer-points-badge.png' } },
+        { offerId: 'OFFER-UC1-VCH', offerName: '$5 Shopping Voucher', offerType: 'VOUCHER', fulfillmentAction: 'ISSUE_VOUCHER', rewardValue: 5.00, currencyType: 'AUD', presentmentDetails: { headline: '$5 Off Your Next Shop', description: 'Digital voucher emailed within 24 hrs, valid 90 days', ctaText: 'Get Voucher', imageUrl: '/offers/offer-voucher.png' } },
+        { offerId: 'OFFER-UC1-PRD', offerName: 'Free Priceline Tote Bag', offerType: 'PRODUCT', fulfillmentAction: 'SHIP_PRODUCT', rewardValue: 0, currencyType: null, presentmentDetails: { headline: 'Free Reusable Tote Bag', description: 'Complimentary Priceline tote added to your order', ctaText: 'Add Free Gift', imageUrl: '/offers/offer-tote-bag.png' } },
+      ],
     });
   }
 
@@ -64,6 +69,10 @@ function buildMockEligible(profile, items, channel) {
       rewardPoints: pts,
       totalReward: `${pts} Beauty Points`,
       promotionType: 'IncrementalPoints',
+      loyaltyOffers: [
+        { offerId: 'OFFER-UC2-PTS', offerName: `${pts} Beauty Points`, offerType: 'POINTS', fulfillmentAction: 'CREDIT_POINTS', rewardValue: pts, currencyType: 'BeautyPoints', presentmentDetails: { headline: `Earn ${pts} Beauty Points`, description: `Worth $${(pts / 200).toFixed(2)} on your Beauty Club account`, ctaText: 'Claim Points', badgeText: 'Auto Applied', imageUrl: '/offers/offer-vitamins.png' } },
+        { offerId: 'OFFER-UC2-DSC', offerName: '10% Off Next Vitamins', offerType: 'DISCOUNT', fulfillmentAction: 'APPLY_DISCOUNT', rewardValue: 10, currencyType: 'PERCENT', presentmentDetails: { headline: '10% Off Next Vitamins Order', description: 'Single-use discount applied at checkout, expires in 30 days', ctaText: 'Get Discount', imageUrl: '/offers/offer-discount-tag.png' } },
+      ],
     });
   }
 
@@ -77,6 +86,9 @@ function buildMockEligible(profile, items, channel) {
       rewardPoints: 0,
       totalReward: '500 Beauty Points on 2nd transaction',
       promotionType: 'EngagementTrail',
+      loyaltyOffers: [
+        { offerId: 'OFFER-UC3-PTS', offerName: '500 Points on Completion', offerType: 'POINTS', fulfillmentAction: 'CREDIT_POINTS', rewardValue: 500, currencyType: 'BeautyPoints', presentmentDetails: { headline: '500 pts after 2nd Haircare purchase', description: 'Completes when you buy Haircare again within 14 days', ctaText: 'Track Progress', imageUrl: '/offers/offer-points-badge.png' } },
+      ],
     });
   }
 
@@ -93,6 +105,10 @@ function buildMockEligible(profile, items, channel) {
       rewardPoints: bonusPts,
       totalReward: `${bonusPts} Beauty Points (${rateLabel})`,
       promotionType: 'SpendMultiplier',
+      loyaltyOffers: [
+        { offerId: 'OFFER-UC4-PTS', offerName: `${bonusPts} Bonus Points`, offerType: 'POINTS', fulfillmentAction: 'CREDIT_POINTS', rewardValue: bonusPts, currencyType: 'BeautyPoints', presentmentDetails: { headline: `${bonusPts} Bonus Points Today`, description: `${rateLabel} — credited at transaction completion`, ctaText: 'Claim Bonus', badgeText: 'Auto Applied', imageUrl: '/offers/offer-points-badge.png' } },
+        { offerId: 'OFFER-UC4-VCH', offerName: '$5 Next Visit Voucher', offerType: 'VOUCHER', fulfillmentAction: 'ISSUE_VOUCHER', rewardValue: 5.00, currencyType: 'AUD', presentmentDetails: { headline: '$5 Off Your Next Visit', description: 'Choose this instead of points — valid on next purchase', ctaText: 'Get Voucher', imageUrl: '/offers/offer-voucher.png' } },
+      ],
     });
   }
 
@@ -108,6 +124,10 @@ function buildMockEligible(profile, items, channel) {
       rewardPoints: lancomePts,
       totalReward: `${lancomePts} Beauty Points (3x on Lancôme)`,
       promotionType: 'PointsMultiplier',
+      loyaltyOffers: [
+        { offerId: 'OFFER-UC5-PTS', offerName: `${lancomePts} Points (3x)`, offerType: 'POINTS', fulfillmentAction: 'CREDIT_POINTS', rewardValue: lancomePts, currencyType: 'BeautyPoints', presentmentDetails: { headline: `${lancomePts} pts — 3x on Lancôme`, description: 'App-exclusive multiplier, credited on order confirmation', ctaText: 'Claim Points', badgeText: 'App Exclusive', imageUrl: '/offers/offer-lancome-perfume.png' } },
+        { offerId: 'OFFER-UC5-PRD', offerName: 'Lancôme Miniature Fragrance', offerType: 'PRODUCT', fulfillmentAction: 'SHIP_PRODUCT', rewardValue: 0, currencyType: null, presentmentDetails: { headline: 'Free Lancôme Miniature', description: 'La Vie Est Belle 5mL miniature added to your order', ctaText: 'Add Free Sample', imageUrl: '/offers/offer-lancome-miniature.png' } },
+      ],
     });
   }
 
@@ -121,6 +141,10 @@ function buildMockEligible(profile, items, channel) {
       rewardPoints: 1000,
       totalReward: '1,000 Beauty Points ($5 value)',
       promotionType: 'WelcomeOffer',
+      loyaltyOffers: [
+        { offerId: 'OFFER-UC6-PTS', offerName: '1,000 Beauty Points', offerType: 'POINTS', fulfillmentAction: 'CREDIT_POINTS', rewardValue: 1000, currencyType: 'BeautyPoints', presentmentDetails: { headline: '1,000 Welcome Points', description: 'New cardholder bonus — $5.00 added to your account', ctaText: 'Claim Welcome Gift', badgeText: 'Welcome Offer', imageUrl: '/offers/offer-points-badge.png' } },
+        { offerId: 'OFFER-UC6-VCH', offerName: '$5 Welcome Voucher', offerType: 'VOUCHER', fulfillmentAction: 'ISSUE_VOUCHER', rewardValue: 5.00, currencyType: 'AUD', presentmentDetails: { headline: '$5 Welcome Voucher', description: 'Prefer cash value? Use this voucher on any purchase', ctaText: 'Get Voucher', imageUrl: '/offers/offer-voucher.png' } },
+      ],
     });
   }
 
@@ -136,6 +160,10 @@ function buildMockEligible(profile, items, channel) {
       totalReward: '1,500 Beauty Points ($7.50 value)',
       promotionType: 'CrossCategoryBundle',
       ruleDetail: 'GPM cross-line rule: qualifies when cartLineDetails span both Skincare and Makeup product catalog categories in a single cartDetails entry.',
+      loyaltyOffers: [
+        { offerId: 'OFFER-UC8-PTS', offerName: '1,500 Beauty Points', offerType: 'POINTS', fulfillmentAction: 'CREDIT_POINTS', rewardValue: 1500, currencyType: 'BeautyPoints', presentmentDetails: { headline: 'Earn 1,500 Beauty Points', description: 'Cross-category reward — worth $7.50 on your account', ctaText: 'Claim Points', badgeText: 'Most Popular', imageUrl: '/offers/offer-cross-category.png' } },
+        { offerId: 'OFFER-UC8-VCH', offerName: '$7.50 Gift Voucher', offerType: 'VOUCHER', fulfillmentAction: 'ISSUE_VOUCHER', rewardValue: 7.50, currencyType: 'AUD', presentmentDetails: { headline: '$7.50 Priceline Voucher', description: 'Redeemable on any future Priceline purchase, valid 90 days', ctaText: 'Get Voucher', imageUrl: '/offers/offer-voucher.png' } },
+      ],
     });
   }
 
@@ -152,6 +180,11 @@ function buildMockEligible(profile, items, channel) {
       promotionType: 'TierExclusive',
       ruleDetail: 'GPM member segment rule: LoyaltyProgramMember.CurrentTier = Gold. Evaluation fails for Standard/Silver — promo not returned in eligiblePromotions response.',
       tierRequired: 'Gold',
+      loyaltyOffers: [
+        { offerId: 'OFFER-UC9-PTS', offerName: '2,000 Beauty Points', offerType: 'POINTS', fulfillmentAction: 'CREDIT_POINTS', rewardValue: 2000, currencyType: 'BeautyPoints', presentmentDetails: { headline: '2,000 Points — Gold Exclusive', description: 'Worth $10 — Gold member exclusive reward', ctaText: 'Claim Points', badgeText: 'Gold Member', imageUrl: '/offers/offer-gold-exclusive.png' } },
+        { offerId: 'OFFER-UC9-DSC', offerName: '10% Off Gift Set', offerType: 'DISCOUNT', fulfillmentAction: 'APPLY_DISCOUNT', rewardValue: 10, currencyType: 'PERCENT', presentmentDetails: { headline: '10% Off Your Gift Set', description: 'Immediate discount applied at checkout for Gold members', ctaText: 'Apply Discount', imageUrl: '/offers/offer-discount-tag.png' } },
+        { offerId: 'OFFER-UC9-PRD', offerName: 'Free Gift Wrap & Ribbon', offerType: 'PRODUCT', fulfillmentAction: 'SHIP_PRODUCT', rewardValue: 0, currencyType: null, presentmentDetails: { headline: 'Free Premium Gift Wrap', description: 'Complimentary gift wrapping with ribbon and personalised card', ctaText: 'Add Gift Wrap', imageUrl: '/offers/offer-gift-wrap.png' } },
+      ],
     });
   }
 
@@ -170,6 +203,10 @@ function buildMockEligible(profile, items, channel) {
       fundingSource: "L'Oréal Australia Pty Ltd",
       fundingModel: 'Supplier absorbs 100% of points cost. Reported via FundingSource__c on PromotionRecord.',
       ruleDetail: "GPM Quick Promotion: product list = L'Oréal Paris SKUs. FundingSource custom field points to L'Oréal Account record for cost attribution and billing.",
+      loyaltyOffers: [
+        { offerId: 'OFFER-UC10-PTS', offerName: `${lorealPts} Points (L'Oréal Funded)`, offerType: 'POINTS', fulfillmentAction: 'CREDIT_POINTS', rewardValue: lorealPts, currencyType: 'BeautyPoints', presentmentDetails: { headline: `${lorealPts} pts — Supplier Funded`, description: "Funded by L'Oréal Australia — no cost to Priceline", ctaText: 'Claim Points', badgeText: "L'Oréal Offer", imageUrl: '/offers/offer-loreal-foundation.png' } },
+        { offerId: 'OFFER-UC10-PRD', offerName: "L'Oréal Paris Sample Pack", offerType: 'PRODUCT', fulfillmentAction: 'SHIP_PRODUCT', rewardValue: 0, currencyType: null, presentmentDetails: { headline: "Free L'Oréal Sample Pack", description: '3-piece True Match deluxe sample set, while stocks last', ctaText: 'Add Samples', imageUrl: '/offers/offer-loreal-samples.png' } },
+      ],
     });
   }
 

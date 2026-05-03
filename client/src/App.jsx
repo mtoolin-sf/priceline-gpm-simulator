@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AccessGate from './components/AccessGate';
 import { CartProvider } from './context/CartContext';
 import { BrandProvider } from './context/BrandContext';
 import Header from './components/Header';
@@ -12,6 +13,7 @@ import Responses from './pages/Responses';
 
 export default function App() {
   return (
+    <AccessGate>
     <BrandProvider>
       <CartProvider>
         <BrowserRouter>
@@ -31,5 +33,6 @@ export default function App() {
         </BrowserRouter>
       </CartProvider>
     </BrandProvider>
+    </AccessGate>
   );
 }
