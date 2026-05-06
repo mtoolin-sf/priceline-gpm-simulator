@@ -345,9 +345,9 @@ function ReferenceDocs({ docs }) {
 
 function PayloadViewer({ title, direction, description, json }) {
   const [open, setOpen] = useState(false);
-  const dirColor = direction.startsWith('SF →') ? '#022AC0' : direction.startsWith('NCR →') ? '#4F2100' : '#023434';
-  const dirBg = direction.startsWith('SF →') ? '#EAF5FE' : direction.startsWith('NCR →') ? '#FBF3E0' : '#DEF9F3';
-  const dirBorder = direction.startsWith('SF →') ? '#90D0FE' : direction.startsWith('NCR →') ? '#FCC003' : '#04E1CB';
+  const dirColor = direction.startsWith('SF →') ? '#022AC0' : direction.startsWith('NCR →') ? '#4F2100' : '#0D3D1F';
+  const dirBg = direction.startsWith('SF →') ? '#EAF5FE' : direction.startsWith('NCR →') ? '#FBF3E0' : '#E8F5ED';
+  const dirBorder = direction.startsWith('SF →') ? '#90D0FE' : direction.startsWith('NCR →') ? '#FCC003' : '#1A7F4E';
   return (
     <div style={{ border: `1px solid ${dirBorder}`, borderRadius: 10, overflow: 'hidden', marginBottom: 10 }}>
       <button
@@ -375,7 +375,7 @@ function PayloadViewer({ title, direction, description, json }) {
 // ─── Slide data ───────────────────────────────────────────────────────────────
 
 const VERDICT_STYLE = {
-  'MEETS':       { pill: '#DEF9F3', pillText: '#023434', pillBorder: '#04E1CB' },
+  'MEETS':       { pill: '#E8F5ED', pillText: '#0D3D1F', pillBorder: '#1A7F4E' },
   'NOT AN ISSUE':{ pill: '#EAF5FE', pillText: '#001E5B', pillBorder: '#90D0FE' },
   'RECOMMENDED': { pill: '#F9F0FF', pillText: '#481A54', pillBorder: '#D17DFE' },
 };
@@ -790,19 +790,18 @@ export default function Responses() {
     <div style={{ fontFamily: "'Salesforce Sans', system-ui, -apple-system, sans-serif", backgroundColor: '#F3F3F3', color: '#181818', minHeight: '100vh', display: 'flex' }}>
 
       {/* ── Sidebar index ── */}
-      <div style={{ width: 220, flexShrink: 0, background: 'linear-gradient(180deg, #001E5B 0%, #022AC0 100%)', display: 'flex', flexDirection: 'column', position: 'fixed', top: 80, left: 0, bottom: 0, zIndex: 30, overflowY: 'auto' }}>
-        {/* Logos */}
-        <div style={{ padding: '18px 16px 14px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-          <img src="/sf-logo-white.png" onError={e => { e.target.onerror = null; e.target.style.display='none'; }} alt="Salesforce" style={{ height: 22, display: 'block', marginBottom: 10 }} />
-          <div style={{ background: '#fff', borderRadius: 5, padding: '4px 10px', display: 'inline-block' }}>
-            <img src="/priceline-logo.webp" alt="Priceline Pharmacy" style={{ height: 18, display: 'block', objectFit: 'contain' }} />
-          </div>
+      <div style={{ width: 220, flexShrink: 0, background: 'linear-gradient(180deg, #001E5B 0%, #022AC0 100%)', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, bottom: 0, zIndex: 30, overflowY: 'auto' }}>
+        {/* Branding */}
+        <div style={{ padding: '20px 16px 16px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+          <img src="/sf-logo-white.png" onError={e => { e.target.onerror = null; e.target.style.display='none'; }} alt="Salesforce" style={{ height: 24, display: 'block', marginBottom: 12 }} />
+          <div style={{ fontSize: 11, fontWeight: 700, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.3 }}>WesHealth</div>
+          <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)', marginTop: 2 }}>RFP Response · Loyalty &amp; GPM</div>
         </div>
 
         {/* Section label */}
-        <div style={{ padding: '10px 16px 6px' }}>
-          <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#00B3FF' }}>WesHealth Requirements</div>
-          <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.4)', marginTop: 3, lineHeight: 1.4 }}>Powered by Salesforce Loyalty Management<br/>Global Promotions · Real Time Offer Management</div>
+        <div style={{ padding: '12px 16px 6px' }}>
+          <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#00B3FF' }}>Requirements</div>
+          <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.35)', marginTop: 3, lineHeight: 1.5 }}>Salesforce Loyalty Management<br/>Global Promotions · RTOM</div>
         </div>
 
         {/* Slide list */}
@@ -827,8 +826,8 @@ export default function Responses() {
                   {isQ && s.verdict && (
                     <span style={{
                       fontSize: 8, fontWeight: 700, padding: '1px 5px', borderRadius: 3,
-                      background: s.verdict === 'MEETS' ? '#04E1CB' : s.verdict === 'NOT AN ISSUE' ? '#90D0FE' : '#D17DFE',
-                      color: s.verdict === 'MEETS' ? '#023434' : s.verdict === 'NOT AN ISSUE' ? '#001E5B' : '#481A54',
+                      background: s.verdict === 'MEETS' ? '#1A7F4E' : s.verdict === 'NOT AN ISSUE' ? '#90D0FE' : '#D17DFE',
+                      color: s.verdict === 'MEETS' ? '#fff' : s.verdict === 'NOT AN ISSUE' ? '#001E5B' : '#481A54',
                       flexShrink: 0,
                     }}>
                       {s.verdict === 'NOT AN ISSUE' ? 'N/A' : s.verdict === 'RECOMMENDED' ? 'REC' : '✓'}
@@ -854,14 +853,14 @@ export default function Responses() {
             ›
           </button>
         </div>
-        <Link to="/" style={{ display: 'block', textAlign: 'center', padding: '8px 12px 14px', fontSize: 11, color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>← Back to Demo</Link>
+        <Link to="/" style={{ display: 'block', textAlign: 'center', padding: '8px 12px 14px', fontSize: 11, color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>← GPM Simulator</Link>
       </div>
 
       {/* ── Main content area ── */}
       <div style={{ marginLeft: 220, flex: 1, display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
 
       {/* Slide content */}
-      <div style={{ flex: 1, padding: '32px 40px 40px', maxWidth: 960, width: '100%', boxSizing: 'border-box' }}>
+      <div style={{ flex: 1, padding: '40px 48px 56px', maxWidth: 1000, width: '100%', boxSizing: 'border-box' }}>
 
         {/* Architecture slide */}
         {slide.isArchitecture && (
@@ -924,7 +923,7 @@ export default function Responses() {
                   {slide.ncrApis.map((row, ri) => (
                     <tr key={ri} style={{ background: ri % 2 === 0 ? '#fff' : '#F8FAFC', borderBottom: '1px solid #E2E8F0' }}>
                       <td style={{ padding: '9px 12px' }}>
-                        <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 6px', borderRadius: 4, background: row.method === 'POST' ? '#EAF5FE' : '#DEF9F3', color: row.method === 'POST' ? '#022AC0' : '#023434' }}>{row.method}</span>
+                        <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 6px', borderRadius: 4, background: row.method === 'POST' ? '#EAF5FE' : '#E8F5ED', color: row.method === 'POST' ? '#022AC0' : '#0D3D1F' }}>{row.method}</span>
                       </td>
                       <td style={{ padding: '9px 12px', fontFamily: 'monospace', fontSize: 11, color: '#3E4D5C', wordBreak: 'break-all' }}>{row.path}</td>
                       <td style={{ padding: '9px 12px', fontSize: 11, color: '#64748B', lineHeight: 1.4 }}>{row.when}</td>
@@ -998,9 +997,9 @@ export default function Responses() {
                 </div>
                 {/* Live status badge */}
                 <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#DEF9F3', border: '1px solid #04E1CB', borderRadius: 8, padding: '6px 12px' }}>
-                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#06A59A' }} />
-                    <span style={{ fontSize: 12, fontWeight: 700, color: '#023434' }}>{slide.status}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#E8F5ED', border: '1px solid #04E1CB', borderRadius: 8, padding: '6px 12px' }}>
+                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#1A7F4E' }} />
+                    <span style={{ fontSize: 12, fontWeight: 700, color: '#0D3D1F' }}>{slide.status}</span>
                   </div>
                   <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)' }}>{slide.deliveredBy}</div>
                 </div>
@@ -1033,8 +1032,8 @@ export default function Responses() {
                       <div style={{ background: '#4F2100', borderRadius: 4, padding: '2px 7px', fontSize: 11, fontWeight: 700, color: '#FCC003', letterSpacing: '0.05em', flexShrink: 0 }}>NCR</div>
                       <span style={{ fontSize: 12, fontWeight: 700, color: '#001E5B' }}>{slide.posNote.value}</span>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                        <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#06A59A' }} />
-                        <span style={{ fontSize: 9, fontWeight: 700, color: '#023434' }}>Connected</span>
+                        <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#1A7F4E' }} />
+                        <span style={{ fontSize: 9, fontWeight: 700, color: '#0D3D1F' }}>Connected</span>
                       </div>
                     </div>
                     <p style={{ fontSize: 10, color: '#4F2100', lineHeight: 1.4, margin: 0 }}>{slide.posNote.note}</p>
@@ -1085,9 +1084,9 @@ export default function Responses() {
 
                 {/* Strategic note (BEAMS) */}
                 {slide.strategicNote && (
-                  <div style={{ background: '#DEF9F3', border: '1px solid #04E1CB', borderLeft: '4px solid #06A59A', borderRadius: '0 8px 8px 0', padding: '10px 16px', marginBottom: 16 }}>
-                    <div style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#023434', marginBottom: 5 }}>Strategic Significance</div>
-                    <p style={{ fontSize: 12, fontWeight: 600, color: '#023434', lineHeight: 1.6, margin: 0 }}>{slide.strategicNote}</p>
+                  <div style={{ background: '#E8F5ED', border: '1px solid #04E1CB', borderLeft: '4px solid #06A59A', borderRadius: '0 8px 8px 0', padding: '10px 16px', marginBottom: 16 }}>
+                    <div style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#0D3D1F', marginBottom: 5 }}>Strategic Significance</div>
+                    <p style={{ fontSize: 12, fontWeight: 600, color: '#0D3D1F', lineHeight: 1.6, margin: 0 }}>{slide.strategicNote}</p>
                   </div>
                 )}
 
@@ -1247,14 +1246,14 @@ export default function Responses() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 10, marginBottom: 24 }}>
                 {slide.callouts.map((c, ci) => (
                   <div key={ci} style={{
-                    background: c.green ? '#DEF9F3' : '#EAF5FE',
-                    border: `1px solid ${c.green ? '#04E1CB' : '#90D0FE'}`,
-                    borderTop: `3px solid ${c.green ? '#06A59A' : '#022AC0'}`,
+                    background: c.green ? '#E8F5ED' : '#EAF5FE',
+                    border: `1px solid ${c.green ? '#1A7F4E' : '#90D0FE'}`,
+                    borderTop: `3px solid ${c.green ? '#1A7F4E' : '#022AC0'}`,
                     borderRadius: 8, padding: '14px 14px 12px',
                   }}>
-                    <div style={{ fontSize: 10, color: c.green ? '#023434' : '#001E5B', fontWeight: 600, opacity: 0.7, marginBottom: 6, lineHeight: 1.3 }}>{c.label}</div>
-                    <div style={{ fontSize: 18, fontWeight: 700, color: c.green ? '#023434' : '#001E5B', lineHeight: 1.1, marginBottom: 4 }}>{c.value}</div>
-                    <div style={{ fontSize: 10, color: c.green ? '#023434' : '#001E5B', opacity: 0.6, lineHeight: 1.4 }}>{c.sub}</div>
+                    <div style={{ fontSize: 10, color: c.green ? '#0D3D1F' : '#001E5B', fontWeight: 600, opacity: 0.75, marginBottom: 6, lineHeight: 1.3 }}>{c.label}</div>
+                    <div style={{ fontSize: 18, fontWeight: 700, color: c.green ? '#1A7F4E' : '#001E5B', lineHeight: 1.1, marginBottom: 4 }}>{c.value}</div>
+                    <div style={{ fontSize: 10, color: c.green ? '#0D3D1F' : '#001E5B', opacity: 0.6, lineHeight: 1.4 }}>{c.sub}</div>
                   </div>
                 ))}
               </div>
