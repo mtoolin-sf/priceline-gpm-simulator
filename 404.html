@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    var seg = window.location.pathname.replace('/priceline-gpm-simulator', '');
+    var query = window.location.search;
+    var hash = window.location.hash;
+    var redirect = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '') + '/priceline-gpm-simulator/' + '?p=' + encodeURIComponent(seg + query) + hash;
+    window.location.replace(redirect);
+  </script>
+</head>
+<body></body>
+</html>

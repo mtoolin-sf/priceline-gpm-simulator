@@ -3,6 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        var p = window.location.search.slice(1);
+        if (p.indexOf('p=') === 0) {
+          var decoded = decodeURIComponent(p.slice(2));
+          window.history.replaceState(null, null, '/priceline-gpm-simulator' + decoded || '/');
+        }
+      })();
+    </script>
     <title>Priceline Beauty Club — GPM Demo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
