@@ -15,8 +15,6 @@ export default function Header() {
   const [reconnectStatus, setReconnectStatus] = useState(null); // 'ok' | 'error' | null
   const navigate = useNavigate();
   const location = useLocation();
-  const onResponsesPage = location.pathname === '/responses';
-
   const cartCount = state.items.reduce((s, i) => s + i.qty, 0);
 
   const handleLogoClick = useCallback(async (e) => {
@@ -98,30 +96,10 @@ export default function Header() {
 
             {/* Right side actions */}
             <div className="flex items-center gap-3">
-              {/* Mock toggle */}
-              <button
-                onClick={() => dispatch({ type: 'TOGGLE_MOCK' })}
-                className={`hidden sm:flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full transition-all ${
-                  state.useMock ? 'bg-yellow-400 text-yellow-900' : 'bg-white/20 text-white'
-                }`}
-                title="Toggle between live Salesforce and mock data"
-              >
-                {state.useMock ? (
-                  <><span className="w-2 h-2 rounded-full bg-yellow-600 inline-block" /> Mock</>
-                ) : (
-                  <><span className="w-2 h-2 rounded-full bg-green-400 inline-block animate-pulse" /> Live SF</>
-                )}
-              </button>
-
-              {/* WesHealth Q&A */}
-              <Link
-                to="/responses"
-                className={`hidden sm:flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full transition-all ${
-                  onResponsesPage ? 'bg-white text-pink-700' : 'bg-white/20 text-white hover:bg-white/30'
-                }`}
-              >
-                WesHealth Q&A
-              </Link>
+              {/* Live SF indicator — no toggle exposed in demo mode */}
+              <span className="hidden sm:flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-white/20 text-white">
+                <span className="w-2 h-2 rounded-full bg-green-400 inline-block animate-pulse" /> Live SF
+              </span>
 
               {/* Mobile app preview */}
               <button
